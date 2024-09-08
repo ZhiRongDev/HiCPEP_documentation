@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Quick start &#8212; HiCPEP  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=12dfc556" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Python API reference" href="api.html" />
+    <link rel="prev" title="Installation" href="install.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="quick-start">
+<h1>Quick start<a class="headerlink" href="#quick-start" title="Link to this heading">¶</a></h1>
+<p>Here we summarize the main usage of HiCPEP:</p>
+<ol class="arabic simple">
+<li><p>Get the Pearson matrix through the <code class="docutils literal notranslate"><span class="pre">peptools.read_pearson()</span></code> or other tools such as <a class="reference external" href="https://github.com/aidenlab/straw">Straw</a> or <a class="reference external" href="https://github.com/open2c/cooltools">cooltools</a>.</p></li>
+<li><p>Create the Estimated PC1-pattern with <code class="docutils literal notranslate"><span class="pre">peptools.create_est()</span></code>.</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hicpep</span> <span class="kn">import</span> <span class="n">peptools</span>
+<span class="kn">import</span> <span class="nn">hicstraw</span>
+
+<span class="n">hic_path</span><span class="o">=</span><span class="s2">&quot;https://hicfiles.s3.amazonaws.com/hiseq/gm12878/in-situ/combined.hic&quot;</span><span class="p">,</span> <span class="c1"># Path to the Juicer&#39;s `.hic` file.</span>
+<span class="n">chrom</span> <span class="o">=</span> <span class="s2">&quot;1&quot;</span>
+<span class="n">resolution</span> <span class="o">=</span> <span class="mi">1000000</span>
+<span class="n">normalization</span> <span class="o">=</span> <span class="s2">&quot;KR&quot;</span>
+
+<span class="n">hic</span> <span class="o">=</span> <span class="n">hicstraw</span><span class="o">.</span><span class="n">HiCFile</span><span class="p">(</span><span class="n">hic_path</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">chromosome</span> <span class="ow">in</span> <span class="n">hic</span><span class="o">.</span><span class="n">getChromosomes</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">chromosome</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">chrom</span><span class="p">:</span>
+        <span class="n">chrom_size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">chromosome</span><span class="o">.</span><span class="n">length</span><span class="p">)</span>
+
+<span class="n">matrix</span> <span class="o">=</span> <span class="n">hic</span><span class="o">.</span><span class="n">getMatrixZoomData</span><span class="p">(</span><span class="n">chrom</span><span class="p">,</span> <span class="n">chrom</span><span class="p">,</span> <span class="s2">&quot;oe&quot;</span><span class="p">,</span> <span class="n">normalization</span><span class="p">,</span> <span class="s2">&quot;BP&quot;</span><span class="p">,</span> <span class="n">resolution</span><span class="p">)</span>
+<span class="n">matrix_np</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">.</span><span class="n">getRecordsAsMatrix</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">chrom_size</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">chrom_size</span><span class="p">)</span>
+<span class="n">pearson_np</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">matrix_np</span><span class="p">)</span>
+
+<span class="n">est_np</span> <span class="o">=</span> <span class="n">peptools</span><span class="o">.</span><span class="n">create_est</span><span class="p">(</span><span class="n">pearson_np</span><span class="o">=</span><span class="n">pearson_np</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;est_np: </span><span class="si">{</span><span class="n">est_np</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For more details, please check the tutorial in the <a class="reference external" href="https://github.com/ZhiRongDev/HiCPEP/blob/main/examples/">examples directory</a>.
+If you are looking for the programs we used in the paper, please check the <a class="reference external" href="https://github.com/ZhiRongDev/HiCPEP/blob/main/code_for_paper">code_for_paper</a>.</p>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">HiCPEP</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Quick start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code_for_paper.html">Code for paper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_store.html">data_store directory structure</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="install.html" title="previous chapter">Installation</a></li>
+      <li>Next: <a href="api.html" title="next chapter">Python API reference</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Zhi-Rong Cheng.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.2.6</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="_sources/quick_start.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

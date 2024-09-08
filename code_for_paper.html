@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Code for paper &#8212; HiCPEP  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=12dfc556" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="data_store directory structure" href="data_store.html" />
+    <link rel="prev" title="Python API reference" href="api.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="code-for-paper">
+<h1>Code for paper<a class="headerlink" href="#code-for-paper" title="Link to this heading">¶</a></h1>
+<p>This page explains how to reproduce the experiment results of our research.
+We store all the programs in the <a class="reference external" href="https://github.com/ZhiRongDev/HiCPEP/blob/main/code_for_paper">code_for_paper</a> directory.</p>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Make sure you have enough disk size for at least 120 GB, and the wifi connection is stable.</p></li>
+<li><p>Make sure you have at least 16 GB memory.</p></li>
+<li><p>Make sure you have installed HiCPEP in your system.</p></li>
+</ul>
+</section>
+<section id="quick-start">
+<h2>Quick start<a class="headerlink" href="#quick-start" title="Link to this heading">¶</a></h2>
+<p>First you have to specify the path for storing all the data required and experiment results, we highly recommand to created an empty directory for this purpose.
+Here we assume the data will all be stored in the <code class="docutils literal notranslate"><span class="pre">/tmp/data_store</span></code> directory, all you need to do is to paste the commands below and wait for it finish (It will takes few hours).</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>/tmp/data_store
+git<span class="w"> </span>clone<span class="w"> </span>git@github.com:ZhiRongDev/HiCPEP.git
+<span class="nb">cd</span><span class="w"> </span>HiCPEP/code_for_paper
+bash<span class="w"> </span>run.sh<span class="w"> </span>-p<span class="w"> </span>/tmp/data_store
+</pre></div>
+</div>
+<p>We explain the directory structure in the <a class="reference external" href="https://github.com/ZhiRongDev/HiCPEP/blob/main/docs/source/data_store.rst">data_store.rst</a>.</p>
+</section>
+<section id="guidance">
+<h2>Guidance<a class="headerlink" href="#guidance" title="Link to this heading">¶</a></h2>
+<p>The following is the content of the <code class="docutils literal notranslate"><span class="pre">code_for_paper</span></code> directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>code_for_paper
+├──<span class="w"> </span>benchmark
+│<span class="w">   </span>├──<span class="w"> </span>juicer
+│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>run_100Kb_pc1.sh
+│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>run_100Kb_pearson.sh
+│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>run_1Mb_pc1.sh
+│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>run_1Mb_pearson.sh
+│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>run_25Kb_pc1.sh
+│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>run_25Kb_pearson.sh
+│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>run_all.sh
+│<span class="w">   </span>├──<span class="w"> </span>benchmark_est_all_100kb.py
+│<span class="w">   </span>├──<span class="w"> </span>benchmark_est_all_1Mb.py
+│<span class="w">   </span>├──<span class="w"> </span>benchmark_est_all_25Kb.py
+│<span class="w">   </span>├──<span class="w"> </span>benchmark_est_sample_100kb.py
+│<span class="w">   </span>├──<span class="w"> </span>benchmark_est_sample_1Mb.py
+│<span class="w">   </span>├──<span class="w"> </span>benchmark_est_sample_25kb.py
+│<span class="w">   </span>├──<span class="w"> </span>benchmark_matrix_size.py
+│<span class="w">   </span>├──<span class="w"> </span>benchmark_scikit_100Kb.py
+│<span class="w">   </span>├──<span class="w"> </span>benchmark_scikit_1Mb.py
+│<span class="w">   </span>├──<span class="w"> </span>benchmark_scikit_25Kb.py
+│<span class="w">   </span>├──<span class="w"> </span>mem_efficient.py
+│<span class="w">   </span>└──<span class="w"> </span>sum_zero_percent.py
+├──<span class="w"> </span>experiments
+│<span class="w">   </span>├──<span class="w"> </span>__init__.py
+│<span class="w">   </span>├──<span class="w"> </span>lieberman_2009.py
+│<span class="w">   </span>├──<span class="w"> </span>rao_2014.py
+│<span class="w">   </span>└──<span class="w"> </span>utils.py
+├──<span class="w"> </span>notebooks
+│<span class="w">   </span>├──<span class="w"> </span>compare_explained_variance.ipynb
+│<span class="w">   </span>├──<span class="w"> </span>compare_similarity.ipynb
+│<span class="w">   </span>├──<span class="w"> </span>compare_time.ipynb
+│<span class="w">   </span>├──<span class="w"> </span>heatmaps.ipynb
+│<span class="w">   </span>└──<span class="w"> </span>plots_for_explaining_formula.ipynb
+├──<span class="w"> </span>reference_gc
+│<span class="w">   </span>├──<span class="w"> </span>hg18
+│<span class="w">   </span>├──<span class="w"> </span>hg19
+│<span class="w">   </span>└──<span class="w"> </span>mm9
+├──<span class="w"> </span>build_pearsons_pc1_2014.sh
+├──<span class="w"> </span>create_ref_gc.sh
+├──<span class="w"> </span>download_required_data.sh
+├──<span class="w"> </span>main.py
+└──<span class="w"> </span>run.sh
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">run.sh</span></code> is the entry point to carry out all the experiments except for <code class="docutils literal notranslate"><span class="pre">benchmark</span></code>, please start the code tracing from this script if you’re interested in how the entire programs work.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">benchmark</span></code> directory contains Python script we used for benchmarking the time and RAM requirement for our estimation algorithm, Juicer and POSSUMM. Please check <a class="reference external" href="https://github.com/ZhiRongDev/HiCPEP/blob/main/code_for_paper/benchmark/README.md">README.md</a> for more information.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">notebooks</span></code> directory contains some of the examples we explained in our paper, all the details are written in the markdown of these notebooks.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">experiments</span></code> directory is a Python package used for the experiments, including the experiment process for rao_2014 (GSE63525) and lieberman_2009 (GSE18199).</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">reference_gc</span></code> directory contains the chromosome GC content references created by UCSC tools, please read <a class="reference external" href="https://github.com/ZhiRongDev/HiCPEP/blob/main/code_for_paper/create_ref_gc.sh">create_ref_gc.sh</a> for more information.</p></li>
+</ul>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">HiCPEP</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">Python API</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Code for paper</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#quick-start">Quick start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#guidance">Guidance</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="data_store.html">data_store directory structure</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="api.html" title="previous chapter">Python API reference</a></li>
+      <li>Next: <a href="data_store.html" title="next chapter">data_store directory structure</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Zhi-Rong Cheng.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.2.6</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="_sources/code_for_paper.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

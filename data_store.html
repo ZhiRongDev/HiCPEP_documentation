@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>data_store directory structure &#8212; HiCPEP  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=12dfc556" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Code for paper" href="code_for_paper.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="data-store-directory-structure">
+<h1>data_store directory structure<a class="headerlink" href="#data-store-directory-structure" title="Link to this heading">¶</a></h1>
+<p>This page explains the output directory structure (i.e. <code class="docutils literal notranslate"><span class="pre">data_store</span></code>) of the <code class="docutils literal notranslate"><span class="pre">code_for_paper</span></code>,
+please read the <a class="reference external" href="https://github.com/ZhiRongDev/HiCPEP/blob/main/docs/code_for_paper.rst">code_for_paper.rst</a> before proceeding.</p>
+<p>In the first layer of <code class="docutils literal notranslate"><span class="pre">data_store</span></code> there are three directories:</p>
+<ol class="arabic simple">
+<li><p>data</p></li>
+<li><p>juicer_tools</p></li>
+<li><p>outputs</p></li>
+</ol>
+<p>The <code class="docutils literal notranslate"><span class="pre">data</span></code> directory is used for storing the data required for the experiments of Lieberman, 2009 (GSE18199) and Rao, 2014 (GSE63525),
+including the Pearson matrices and PC1s for each cell line at the resolution of 1Mb and 100Kb.
+For the experiments of Lieberman, 2009, the data are directly downloaded from <a class="reference external" href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE18199">GSE18199</a>;
+For the experiments of Rao, 2014, the <code class="docutils literal notranslate"><span class="pre">.hic</span></code> data are downloaded from <a class="reference external" href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE63525">GSE63525</a>,
+and processed with <a class="reference external" href="https://github.com/aidenlab/juicer/wiki/Download">juicer_tools 1.22.01</a> for creating the Pearsons and PC1s.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">outputs</span></code> directory is used for storing the experiment results, including the Estimated PC1-pattern <code class="docutils literal notranslate"><span class="pre">.txt</span></code> files, scatter &amp; relative_magnitude plots and the summary informations of all the experiments.
+Note that we created the Estimated PC1-pattern by selecting the <code class="docutils literal notranslate"><span class="pre">cxmax</span></code> or <code class="docutils literal notranslate"><span class="pre">cxmin</span></code> of the Pearson’s covariance matrix, at the resolution of 1Mb and 100Kb;
+Besides, since GSE63525 doesn’t provide the <cite>.hic</cite> files for HeLa, we skip this cell line.</p>
+<p>Here we further explain the details of the <code class="docutils literal notranslate"><span class="pre">outputs</span></code> directory structure, in the first layer of <code class="docutils literal notranslate"><span class="pre">outputs</span></code> there are three directories:</p>
+<ol class="arabic simple">
+<li><p>est_pc1_pattern</p></li>
+<li><p>plots</p></li>
+<li><p>summary</p></li>
+</ol>
+<p>The <code class="docutils literal notranslate"><span class="pre">est_pc1_pattern</span></code> directory contains the text files of the Estimated PC1-pattern.
+The <code class="docutils literal notranslate"><span class="pre">plots</span></code> directories including the scatter and the relative_magnitude plots.
+In the <code class="docutils literal notranslate"><span class="pre">summary</span></code> directory there are (2009 means using the data from GSE18199; 2014 means using the data from GSE63525):</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">summary_similarity_2009.xlsx</span></code> and <code class="docutils literal notranslate"><span class="pre">summary_similarity_2014.xlsx</span></code>, which is for comparing the <code class="docutils literal notranslate"><span class="pre">similar_rate</span></code> between the juicer_tools calculated PC1 and the Estimated PC1-pattern.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">summary_self_pca_2009.xlsx</span></code> and <code class="docutils literal notranslate"><span class="pre">summary_self_pca_2014.xlsx</span></code>, which is for recording the explained variance ratio of the first 3 Principal components of the Pearson matrix, and for recording the <code class="docutils literal notranslate"><span class="pre">similar_rate</span></code> between the self calaulated PC1 (NOT the juicer_tools calculated PC1) and the Estimated PC1-pattern.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">summary_similar_rate_percentage_2014.xlsx</span></code>, which is used for summarizing the percentage of columns in the covariance matrix that has a similar_rate over 90%, 95% or 99%.</p></li>
+</ol>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">HiCPEP</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code_for_paper.html">Code for paper</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">data_store directory structure</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="code_for_paper.html" title="previous chapter">Code for paper</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Zhi-Rong Cheng.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.2.6</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="_sources/data_store.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
