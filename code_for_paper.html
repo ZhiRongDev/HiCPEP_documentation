@@ -61,7 +61,23 @@ bash<span class="w"> </span>run.sh<span class="w"> </span>-p<span class="w"> </s
 <p>The following is the content of the <code class="docutils literal notranslate"><span class="pre">code_for_paper</span></code> directory:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>code_for_paper
 ├──<span class="w"> </span>benchmark
+│<span class="w">   </span>├──<span class="w"> </span>1_calc_matrix_size.py
+│<span class="w">   </span>├──<span class="w"> </span>2_sum_zero_percent.py
+│<span class="w">   </span>├──<span class="w"> </span>3_store_oe_sparse.py
+│<span class="w">   </span>├──<span class="w"> </span>benchmark_est_all_100kb.py
+│<span class="w">   </span>├──<span class="w"> </span>benchmark_est_all_1Mb.py
+│<span class="w">   </span>├──<span class="w"> </span>benchmark_est_all_25Kb.py
+│<span class="w">   </span>├──<span class="w"> </span>benchmark_est_mem_efficient_100Kb.py
+│<span class="w">   </span>├──<span class="w"> </span>benchmark_est_mem_efficient_1Mb.py
+│<span class="w">   </span>├──<span class="w"> </span>benchmark_est_sample_100kb.py
+│<span class="w">   </span>├──<span class="w"> </span>benchmark_est_sample_1Mb.py
+│<span class="w">   </span>├──<span class="w"> </span>benchmark_est_sample_25kb.py
+│<span class="w">   </span>├──<span class="w"> </span>benchmark_scikit_100Kb.py
+│<span class="w">   </span>├──<span class="w"> </span>benchmark_scikit_1Mb.py
+│<span class="w">   </span>├──<span class="w"> </span>benchmark_scikit_25Kb.py
 │<span class="w">   </span>├──<span class="w"> </span>juicer
+│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>output
+│<span class="w">   </span>│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>run_all.log
 │<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>run_100Kb_pc1.sh
 │<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>run_100Kb_pearson.sh
 │<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>run_1Mb_pc1.sh
@@ -69,37 +85,46 @@ bash<span class="w"> </span>run.sh<span class="w"> </span>-p<span class="w"> </s
 │<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>run_25Kb_pc1.sh
 │<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>run_25Kb_pearson.sh
 │<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>run_all.sh
-│<span class="w">   </span>├──<span class="w"> </span>benchmark_est_all_100kb.py
-│<span class="w">   </span>├──<span class="w"> </span>benchmark_est_all_1Mb.py
-│<span class="w">   </span>├──<span class="w"> </span>benchmark_est_all_25Kb.py
-│<span class="w">   </span>├──<span class="w"> </span>benchmark_est_sample_100kb.py
-│<span class="w">   </span>├──<span class="w"> </span>benchmark_est_sample_1Mb.py
-│<span class="w">   </span>├──<span class="w"> </span>benchmark_est_sample_25kb.py
-│<span class="w">   </span>├──<span class="w"> </span>benchmark_matrix_size.py
-│<span class="w">   </span>├──<span class="w"> </span>benchmark_scikit_100Kb.py
-│<span class="w">   </span>├──<span class="w"> </span>benchmark_scikit_1Mb.py
-│<span class="w">   </span>├──<span class="w"> </span>benchmark_scikit_25Kb.py
-│<span class="w">   </span>├──<span class="w"> </span>mem_efficient.py
-│<span class="w">   </span>└──<span class="w"> </span>sum_zero_percent.py
-├──<span class="w"> </span>experiments
-│<span class="w">   </span>├──<span class="w"> </span>__init__.py
-│<span class="w">   </span>├──<span class="w"> </span>lieberman_2009.py
-│<span class="w">   </span>├──<span class="w"> </span>rao_2014.py
-│<span class="w">   </span>└──<span class="w"> </span>utils.py
-├──<span class="w"> </span>notebooks
-│<span class="w">   </span>├──<span class="w"> </span>compare_explained_variance.ipynb
-│<span class="w">   </span>├──<span class="w"> </span>compare_similarity.ipynb
-│<span class="w">   </span>├──<span class="w"> </span>compare_time.ipynb
-│<span class="w">   </span>├──<span class="w"> </span>heatmaps.ipynb
-│<span class="w">   </span>└──<span class="w"> </span>plots_for_explaining_formula.ipynb
-├──<span class="w"> </span>reference_gc
-│<span class="w">   </span>├──<span class="w"> </span>hg18
-│<span class="w">   </span>├──<span class="w"> </span>hg19
-│<span class="w">   </span>└──<span class="w"> </span>mm9
+│<span class="w">   </span>├──<span class="w"> </span>POSSUMM
+│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>R
+│<span class="w">   </span>│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>benchmark_similarity_POSSUMM.ipynb
+│<span class="w">   </span>│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>bestEigen3.R
+│<span class="w">   </span>│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>eigenVectorRscript.R
+│<span class="w">   </span>│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>eigFromHicRscript.R
+│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>README.md
+│<span class="w">   </span>└──<span class="w"> </span>README.md
 ├──<span class="w"> </span>build_pearsons_pc1_2014.sh
 ├──<span class="w"> </span>create_ref_gc.sh
 ├──<span class="w"> </span>download_required_data.sh
+├──<span class="w"> </span>experiments
+│<span class="w">   </span>├──<span class="w"> </span>__init__.py
+│<span class="w">   </span>├──<span class="w"> </span>lieberman_2009.py
+│<span class="w">   </span>├──<span class="w"> </span>__pycache__
+│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>calc_correctness.cpython-311.pyc
+│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>__init__.cpython-311.pyc
+│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>lieberman_2009.cpython-311.pyc
+│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>process.cpython-311.pyc
+│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>rao_2014.cpython-311.pyc
+│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>utils.cpython-311.pyc
+│<span class="w">   </span>├──<span class="w"> </span>rao_2014.py
+│<span class="w">   </span>└──<span class="w"> </span>utils.py
 ├──<span class="w"> </span>main.py
+├──<span class="w"> </span>notebooks
+│<span class="w">   </span>├──<span class="w"> </span>compare_explained_variance_ratio.ipynb
+│<span class="w">   </span>├──<span class="w"> </span>data
+│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>gm12878_pc1_25000_chr2.txt
+│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>gm12878_pc1_25000_chr5.txt
+│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>gm12878_pearson_25000_chr2.txt
+│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>gm12878_pearson_25000_chr5.txt
+│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>hg19_gc25000_chr2.txt
+│<span class="w">   </span>├──<span class="w"> </span>GC_content_effect.ipynb
+│<span class="w">   </span>├──<span class="w"> </span>heatmaps.ipynb
+│<span class="w">   </span>├──<span class="w"> </span>low_similar_rate_percentage_IMR90_NHEK_chrY_reason.ipynb
+│<span class="w">   </span>└──<span class="w"> </span>plots_for_explaining_formula.ipynb
+├──<span class="w"> </span>reference_gc
+│<span class="w">   </span>├──<span class="w"> </span>hg18
+│<span class="w">   </span>├──<span class="w"> </span>hg19
+│<span class="w">   </span>└──<span class="w"> </span>mm9
 └──<span class="w"> </span>run.sh
 </pre></div>
 </div>
